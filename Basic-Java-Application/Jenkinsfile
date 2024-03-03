@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            agent {
+                docker { 
+                    image 'openjdk:17'
+                }
+            }
+            steps {
+                script {
+                    sh 'ls -l'
+                    sh 'javac HelloWorld.java'
+                }
+            }
+        }
+        stage('Run') {
+            steps {
+                script {
+                    sh 'java HelloWorld'
+                }
+            }
+        }
+    }
+}
